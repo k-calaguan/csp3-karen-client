@@ -8,7 +8,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>KAREN</title>
-	<link rel="icon" type="image/x-icon" href="{{ asset('/karen-pink.ico') }}">
+	<link rel="icon" type="image/x-icon" href="{{ asset('/img/icons/karen-pink.ico') }}">
 
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,7 +30,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-link m-3">
 		<a class="navbar-brand" href="/">
-			<img src="{{ asset('/karen-pink.ico') }}">
+			<img src="{{ asset('/img/icons/karen-pink.ico') }}">
 			<span>KAREN</span> 
 		</a>
 

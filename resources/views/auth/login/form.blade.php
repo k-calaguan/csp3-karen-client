@@ -8,7 +8,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>Karen</title>
-	<link rel="icon" type="image/x-icon" href="{{ asset('/karen-pink.ico') }}">
+	<link rel="icon" type="image/x-icon" href="{{ asset('/img/icons/karen-pink.ico') }}">
 
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,7 +30,7 @@
 <body style="height: 100%">
 
 <div style="background-image: url({{url('/img/login-bg.jpg')}}); background-size: cover; height: 100%">
-	<a href="/"><img class="pl-3 pt-3 pb-5" src="{{ asset('/karen-pink.ico') }}"></a>
+	<a href="/"><img class="pl-3 pt-3 pb-5" src="{{ asset('/img/icons/karen-white.ico') }}"></a>
 	<div class="container justify-contents-center">
 
 		@if(Session::has("message"))

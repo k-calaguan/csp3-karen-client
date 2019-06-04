@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR|Aclonica|Gloria+Hallelujah&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Libre+Baskerville|Nanum+Gothic|Source+Sans+Pro&display=swap");
+
+html, body {
+background-color: #fff;
+color: #636b6f;
+font-weight: 200;
+height: 100vh;
+margin: 0;
+}
+
+.text-extra {
+	font-family: 'Gloria Hallelujah', cursive;
+	color: #4F4F4F;
+}
+
+.logo-icon {
+	height: 50px;
+}
+
+.text-brand {
+	font-family: 'Aclonica', sans-serif;
+	color: #FF3860; /*logo icon pink color*/
+}
+
+/*#btn-effect {
+	animation: glowing 1500ms infinite;
+}
+
+@keyframes glowing {
+  0% { box-shadow: 0 0 2px #FFF; }
+  30% { box-shadow: 0 0 15px #FFF; }
+}*/
+
+#btn-effect {
+	box-shadow: 1px 1px 5px grey;
+	animation: bounce 500ms infinite;
+	animation-direction: alternate;
+}
+
+@keyframes bounce { 
+	0% { transform: translateY(0); }
+	100% { transform: translateY(-8px); }
+}
+
+
+.full-height {
+	height: 100vh;
+	background-image: url('/img/landingpage.jpg');
+	background-size: cover;
+}
+
+.flex-center {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.content {
+	text-align: center;
+}

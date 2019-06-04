@@ -8,7 +8,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>KAREN</title>
-	<link rel="icon" type="image/x-icon" href="{{ asset('/karen-pink.ico') }}">
+	<link rel="icon" type="image/x-icon" href="{{ asset('/img/icons/karen-pink.ico') }}">
 
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,7 +30,7 @@
 <body style="height: 100%">
 
 <div style="background-image: url({{url('/img/registration-bg.jpg')}}); background-size: cover; height: 100%">
-	<a href="/"><img class="pl-3 pt-3 pb-5" src="{{ asset('/karen-pink.ico') }}"></a>
+	<a href="/"><img class="pl-3 pt-3 pb-5" src="{{ asset('/img/icons/karen-pink.ico') }}"></a>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-lg-5 card" style="background-color: rgba(252, 252, 252, 0.7); border: none">
