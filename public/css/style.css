@@ -1,4 +1,35 @@
-html {
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css?family=Aclonica");
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:500");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,700");
+
+html, body {
 	height: 100vh;
 	margin: 0;
+}
+
+.reg-background {
+	background-image: url('/img/registration-bg.jpg'); 
+	background-size: cover; height: 100%;
+}
+
+.login-background {
+	background-image: url('/img/login-bg.jpg'); 
+	background-size: cover; height: 100%;
+}
+
+.login-card,
+.reg-card {
+	background-color: rgba(252, 252, 252, 0.7); 
+	border: none;
+}
+
+.text-brand {
+	font-family: 'Aclonica', sans-serif;
+	font-size: 2.9em;
+	color: #FF3860; /*logo icon pink color*/
+}
+
+#text-none {
+	text-decoration: none;
 }

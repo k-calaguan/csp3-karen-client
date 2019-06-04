@@ -1,17 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR|Aclonica|Gloria+Hallelujah&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Libre+Baskerville|Nanum+Gothic|Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Aclonica|Gloria+Hallelujah&display=swap");
 
 html, body {
-background-color: #fff;
-color: #636b6f;
-font-weight: 200;
 height: 100vh;
 margin: 0;
-}
-
-.text-extra {
-	font-family: 'Gloria Hallelujah', cursive;
-	color: #4F4F4F;
 }
 
 .logo-icon {
@@ -21,6 +12,11 @@ margin: 0;
 .text-brand {
 	font-family: 'Aclonica', sans-serif;
 	color: #FF3860; /*logo icon pink color*/
+}
+
+.text-extra {
+	font-family: 'Gloria Hallelujah', cursive;
+	color: #4F4F4F;
 }
 
 /*#btn-effect {

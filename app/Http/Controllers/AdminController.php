@@ -15,7 +15,8 @@ class AdminController extends Controller
 
 	/*-------------------- CARS --------------------*/
 	public function car_index() {
-		$client = new Client(["base_uri" => "http://localhost:3000"]);
+		// $client = new Client(["base_uri" => "http://localhost:3000"]);
+		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 
 		$response = $client->request("GET", "/admin/cars", [
 			"headers" => [
@@ -66,7 +67,8 @@ class AdminController extends Controller
 		$request->image->move(public_path('/img'), str_replace(' ', '_', $request->image->getClientOriginalName()));
 		$image = '/img/'.str_replace(' ', '_', $request->image->getClientOriginalName());
 
-		$client = new Client(['base_uri' => "http://localhost:3000"]);
+		// $client = new Client(['base_uri' => "http://localhost:3000"]);
+		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 
 		$response = $client->request('post', '/admin/cars', [
 			"http_errors" => false,
@@ -122,7 +124,8 @@ class AdminController extends Controller
 			$isActive = false;
 		}
 		
-		$client = new Client(['base_uri' => "http://localhost:3000"]);
+		// $client = new Client(['base_uri' => "http://localhost:3000"]);
+		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 		
 		$carRes = $client->request("GET", "/admin/cars", [
 			"headers" => [
@@ -174,7 +177,8 @@ class AdminController extends Controller
 
 	/*-------------------- USERS --------------------*/
 	public function user_index() {
-		$client = new Client(["base_uri" => "http://localhost:3000"]);
+		// $client = new Client(["base_uri" => "http://localhost:3000"]);
+		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 
 		$response = $client->request("GET", "/admin/users", [
 			"headers" => [
@@ -193,7 +197,8 @@ class AdminController extends Controller
 
 	/*-------------------- TRANSACTIONS -------------------- */
 	public function trans_index() {
-		$client = new Client(["base_uri" => "http://localhost:3000"]);
+		// $client = new Client(["base_uri" => "http://localhost:3000"]);
+		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 
 		$response = $client->request("GET", "/admin/bookings", [
 			"headers" => [
