@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSRF Token -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+	<title>KAREN</title>
+	<link rel="icon" type="image/x-icon" href="{{ asset('/karen-pink.ico') }}">
+
+	<!-- Scripts -->
+	<script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="{{ asset('js/bootstrap.js') }}" defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+	<!-- Fonts -->
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+
+	<!-- Styles -->
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-link m-3">
+		<a class="navbar-brand" href="/">
+			<img src="{{ asset('/karen-pink.ico') }}">
+			<span>KAREN</span> 
+		</a>
+
+		@if(Session::has('user'))
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContents">
+				<i class="fas fa-ellipsis-v"></i>
+			</button>
+		@endif
+
+		<div class="collapse navbar-collapse" id="navbarContents">
+			<ul class="navbar-nav mr-auto">
+				@if(Session::has("user"))
+					@if(Session("user")->isAdmin == true)
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/users">Users</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link" href="" data-toggle="dropdown">Cars</a>
+
+							<div class="dropdown-menu">
+								<a class="nav-link" href="/admin/cars/create">Add new car</a>
+								<a class="nav-link" href="/admin/cars">Manage</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/transactions">Transactions</a>
+						</li>
+					@else
+						<li class="nav-item">
+							<a class="nav-link" href="/cars">Cars</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/transactions">Transactions</a>
+						</li>
+
+					@endif
+
+					<li class="nav-item">
+						<a class="nav-link" href="/logout">Logout</a>
+					</li>
+				@endif
+			</ul>
+		</div>
+	</nav>
+
+	<main class="mt-2">
+		@yield('content')
+	</main>
+</body>
+</html>

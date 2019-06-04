@@ -1,0 +1,34 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container">
+	<div class="card" style="border: none">
+		<div class="card-body table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Created</th>
+						<th>Customer</th>
+						<th>Car Details</th>
+						<th>Trans Type</th>
+						<th>Total Charge</th>
+						<th>Updated</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->created_at)->format('m-d-Y H:m:s') }}</td>
+						<td>{{ Session('results')->customer->name }}</td>
+						<td>{{ Session('results')->car->brandMod }}</td>
+						<td>{{ Session('results')->booking->transactionType }}</td>
+						<td>{{ Session('results')->booking->totalCharge }}</td>
+						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->updated_at)->format('m-d-Y H:m:s') }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+@endsection
