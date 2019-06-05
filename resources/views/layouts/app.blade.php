@@ -94,12 +94,10 @@
 			@endif
 
 			<div class="navbar-nav flex-row ml-md-auto">
-				<div class="svg-wrapper">
-				  	<svg height="40" width="150">
-						<div id="text">
-							<a href="/logout">Logout</a>
-						</div>
-					</svg>
+				<div class="nav-item pt-4 pr-5">
+					<div id="text">
+						<a href="/logout">Logout</a>
+					</div>
 				</div>
 			</div>
 		</div>
