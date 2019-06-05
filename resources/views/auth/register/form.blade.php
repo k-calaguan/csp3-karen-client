@@ -30,7 +30,7 @@
 <body>
 
 <div class="reg-background">
-	<a id="text-none" href="/">
+	<a class="navbar-brand" href="/">
 		<img class="pl-3 pt-3 pb-5" src="{{ asset('/img/icons/karen-pink.ico') }}">
 		<span class="text-brand">KAREN</span>
 	</a>
@@ -40,7 +40,14 @@
 				<div class="mt-3">
 					<h3 class="pl-3 text-black-50">Register now to discover cars perfect for any trip.</h3>
 				</div>
+				
 				<div class="card-body">
+					@if(Session::has("error"))
+					<div class="pb-1">
+						<span class="text-danger">{{ Session("error") }}</span><br>
+					</div>
+					@endif
+
 					<form method="POST" action="/register">
 						@csrf
 						<div class="form-group">
@@ -57,7 +64,7 @@
 								
 								<div class="col-sm-12 col-lg-6">
 									<select id="gender" class="form-control" name="gender" required>
-										<option class="text-secondary" value="{{ old('gender') }}">Select your gender</option>
+										<option class="text-secondary" value="{{ old('gender') }}" hidden>Select your gender</option>
 										<option value="male">Male</option>
 										<option value="female">Female</option>
 										<option value="dwts">Don't want to say</option>
@@ -103,7 +110,7 @@
 					</form>
 					
 					<p>
-						<h7>Already have a KAREN account?</h7>
+						<h7>Already have an account?</h7>
 						<a href="/login" class="btn-link">Login here</a>
 					</p>
 				</div>

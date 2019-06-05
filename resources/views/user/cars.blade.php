@@ -4,21 +4,22 @@
 
 <div class="container">
 	@if(Session::has("message"))
-		<div class="alert col-sm-12 col-lg-4">
+		<div class="alert col-sm-12 col-lg-5">
 			<span class="text-light">{{Session('message')}}</span>
 		</div>
 	@endif
 	@if(Session::has("error"))
-		<div class="alert col-sm-12 col-lg-4">
+		<div class="alert col-sm-12 col-lg-5">
 			<span class="text-danger">{{Session('error')}}</span>
 		</div>
 	@endif
 	<div class="card-deck row">
 		@foreach(Session('cars') as $car)
 		<div class="card col-sm-6 col-lg-3">
-			<img src="">
+			<div class="card-heard">
+				 <img src="{{ $car->image }}" class="img-thumbnail" style="border: none">
+			</div>
 			<div class="card-body">
-				 <img src="{{ $car->image }}" class="img-thumbnail">
 				 {{ $car->brandMod }}
 				 {{ 'Php ' . $car->price }}
 				 {{ $car->modYear }}

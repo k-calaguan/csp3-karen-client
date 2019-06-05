@@ -25,10 +25,12 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-link m-3">
+	<nav class="navbar navbar-expand-md navbar-light bg-link sticky-top">
 		<a class="navbar-brand" href="/">
 			<img src="{{ asset('/img/icons/karen-pink.ico') }}">
-			<span>KAREN</span> 
+		</a>
+		<a class="navbar-brand" href="/">
+			<span class="text-brand">KAREN</span>
 		</a>
 
 		@if(Session::has('user'))
@@ -38,38 +40,68 @@
 		@endif
 
 		<div class="collapse navbar-collapse" id="navbarContents">
-			<ul class="navbar-nav mr-auto">
-				@if(Session::has("user"))
+			@if(Session::has("user"))
+				<div class="navbar-nav">
 					@if(Session("user")->isAdmin == true)
-						<li class="nav-item">
-							<a class="nav-link" href="/admin/users">Users</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link" href="" data-toggle="dropdown">Cars</a>
+						<div class="svg-wrapper nav-item">
+						  	<svg height="40" width="115" xmlns="http://www.w3.org/2000/svg">
+								<rect id="shape" height="40" width="115" />
+								<div id="text">
+									<a href="/admin/users">Users</a>
+								</div>
+							</svg>
+						</div>
+						<div class="svg-wrapper nav-item dropdown">
+						  	<svg height="40" width="115" xmlns="http://www.w3.org/2000/svg">
+								<rect id="shape" height="40" width="115" />
+								<div id="text">
+									<a>Cars</a>
 
-							<div class="dropdown-menu">
-								<a class="nav-link" href="/admin/cars/create">Add new car</a>
-								<a class="nav-link" href="/admin/cars">Manage</a>
-							</div>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/admin/transactions">Transactions</a>
-						</li>
+									<div class="dropdown-menu">
+										<a class="nav-link" href="/admin/cars/create">Add new car</a>
+										<a class="nav-link" href="/admin/cars">Manage</a>
+									</div>
+								</div>
+							</svg>
+						</div>
+						<div class="svg-wrapper nav-item">
+						  	<svg height="40" width="115" xmlns="http://www.w3.org/2000/svg">
+								<rect id="shape" height="40" width="115" />
+								<div id="text">
+									<a href="/admin/transactions">Transactions</a>
+								</div>
+							</svg>
+						</div>
 					@else
-						<li class="nav-item">
-							<a class="nav-link" href="/cars">Cars</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/transactions">Transactions</a>
-						</li>
-
+						<div class="svg-wrapper nav-item">
+						  	<svg height="40" width="115" xmlns="http://www.w3.org/2000/svg">
+								<rect id="shape" height="40" width="115" />
+								<div id="text">
+									<a href="/cars">Cars</a>
+								</div>
+							</svg>
+						</div>
+						<div class="svg-wrapper nav-item">
+						  	<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+								<rect id="shape" height="40" width="115"/>
+								<div id="text">
+									<a href="/transactions">Transactions</a>
+								</div>
+							</svg>
+						</div>
 					@endif
+				</div>
+			@endif
 
-					<li class="nav-item">
-						<a class="nav-link" href="/logout">Logout</a>
-					</li>
-				@endif
-			</ul>
+			<div class="navbar-nav">
+				<div class="nav-item">
+				  	<svg height="40" width="150">
+						<div id="text">
+							<a href="/logout">Logout</a>
+						</div>
+					</svg>
+				</div>
+			</div>
 		</div>
 	</nav>
 

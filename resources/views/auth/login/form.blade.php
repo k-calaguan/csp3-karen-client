@@ -26,16 +26,21 @@
 <body style="height: 100%">
 
 <div class="login-background">
-	<a id="text-none" href="/">
+	<a class="navbar-brand" href="/">
 		<img class="pl-3 pt-3 pb-5" src="{{ asset('/img/icons/karen-pink.ico') }}">
 		<span class="text-brand">KAREN</span>
 	</a>
 	<div class="container justify-contents-center">
-
 		@if(Session::has("message"))
-			<div class="alert col-sm-12 col-lg-4">
-				<span class="text-light">{{Session('message')}}</span>
+			<div class="alert alert-light alert-trans col-sm-12 col-lg-5">
+				<span class="text-success">{{Session('message')}}</span>
 			</div>
+		@endif
+
+		@if(Session::has("error"))
+		<div class="alert alert-light alert-trans col-sm-12 col-lg-5">
+			<span class="text-danger mb-1">{{ Session("error") }}</span><br>
+		</div>
 		@endif
 
 		<div class="container">
@@ -45,6 +50,7 @@
 						<h3 class="pl-3 text-black-50">Ready for another road trip?</h3>
 					</div>
 					<div class="card-body">
+
 						<form method="POST" action="/login">
 							@csrf
 							<div class="form-group">

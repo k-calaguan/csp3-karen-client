@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Support\MessageBag;
 use Session;
 
@@ -26,34 +27,41 @@ class AuthController extends Controller
 		]);
 
 		if($validator->fails()) {
-			$errors = $validator->errors();
+			$error = $validator->errors()->first();
 
-			dd($errors);
-			return redirect('/register')
-				->withErrors($errors);
+			// dd($error);
+			Session::flash("error", $error);
+			return view('auth.register.form');
 		}
 
-		// $client = new Client(['base_uri' => "http://localhost:3000"]);
-		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+		try {
+			// $client = new Client(['base_uri' => "http://localhost:3000"]);
+			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 
-		$response = $client->request('post', '/register', [
-			"http_errors" => false,
-			"json" => [
-				"name" => $request->name,
-				"email" => $request->email,
-				"password" => $request->password,
-				"dob" => $request->dob,
-				"gender" => $request->gender,
-				"contactNum" => $request->contactNum,
-				"homeAddress" => $request->homeAddress
-			]
-		]);
-
-		$result = json_decode($response->getBody());
+			$response = $client->request('post', '/register', [
+				"json" => [
+					"name" => $request->name,
+					"email" => $request->email,
+					"password" => $request->password,
+					"dob" => $request->dob,
+					"gender" => $request->gender,
+					"contactNum" => $request->contactNum,
+					"homeAddress" => $request->homeAddress
+				]
+			]);
+			
+			$result = json_decode($response->getBody());
+		} catch(BadResponseException $e) {
+			// dd($e->getRequest());
+		    if ($e->hasResponse()) {
+		    	$e = json_decode($e->getResponse()->getBody()->getContents(), true);
+		    	// dd($e['error']);
+		        Session::flash("error", $e['error']);
+				return redirect('/register');
+		    }
+		}
 
 		Session::flash("message", "You have successfully registered.");
-		Session::flash("alert-type", "success");
-
 		return redirect('/login');
 	}
 
@@ -62,26 +70,35 @@ class AuthController extends Controller
 	}
 
 	public function loginUser(Request $request) {
-		// $client = new Client(['base_uri' => "http://localhost:3000"]);
-		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+		try {
+			// $client = new Client(['base_uri' => "http://localhost:3000"]);
+			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 
-		$response = $client->request('post', '/auth/login', [
-			"json" => [
-				"email" => $request->email,
-				"password" => $request->password
-			]
-		]);
+			$response = $client->request('post', '/auth/login', [
+				"json" => [
+					"email" => $request->email,
+					"password" => $request->password
+				]
+			]);
 
-		$result = json_decode($response->getBody());
-		Session::put("user", $result->data->user);
-		Session::put("token", "Bearer ".$result->data->token);
+			$result = json_decode($response->getBody());
+			Session::put("user", $result->data->user);
+			Session::put("token", "Bearer ".$result->data->token);
 
-		if($result->data->user->isAdmin == true) {
-			Session::flash("message", "Welcome back ");
-			return redirect('/admin/dashboard');
-		} else {
-			Session::flash("message", "Welcome back ");
-			return redirect('/dashboard');
+			if($result->data->user->isAdmin == true) {
+				return redirect('/admin/dashboard');
+			} else {
+				return redirect('/cars');
+			}
+		} catch(BadResponseException $e) {
+			// dd($e->getRequest());
+		    if ($e->hasResponse()) {
+		    	// dd($e);
+		    	$e = json_decode($e->getResponse()->getBody()->getContents(), true);
+		    	// dd($e['error']);
+		        Session::flash("error", $e['error']);
+				return redirect('/login');
+		    }
 		}
 	}
 
