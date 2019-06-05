@@ -86,6 +86,7 @@ class AuthController extends Controller
 			Session::put("token", "Bearer ".$result->data->token);
 
 			if($result->data->user->isAdmin == true) {
+				Session::flash("message", "Welcome back ".$result->data->user->name);
 				return redirect('/admin/dashboard');
 			} else {
 				return redirect('/cars');

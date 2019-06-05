@@ -93,8 +93,8 @@
 				</div>
 			@endif
 
-			<div class="navbar-nav">
-				<div class="nav-item">
+			<div class="navbar-nav flex-row ml-md-auto">
+				<div class="svg-wrapper">
 				  	<svg height="40" width="150">
 						<div id="text">
 							<a href="/logout">Logout</a>
