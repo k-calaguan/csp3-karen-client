@@ -41,6 +41,7 @@ html, body {
 
 .navbar {
 	background-color: #FFF;
+	border-bottom: double 5px #FF3860;
 }
 
 .fa-ellipsis-v {

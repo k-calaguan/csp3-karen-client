@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Session;
 use Illuminate\Support\Carbon;
+use GuzzleHttp\Exception\BadResponseException;
 
 class UserController extends Controller
 {
@@ -33,6 +34,7 @@ class UserController extends Controller
 
 
 	public function showBookingForm(Request $request) {
+		// dd($request);
 		$validator = Validator::make($request->all(), [
 			'startDate' => 'required|date',
 			'endDate' => 'required|date'
@@ -45,31 +47,62 @@ class UserController extends Controller
 			return redirect('/cars');
 		}
 
-		// $client = new Client(["base_uri" => "http://localhost:3000"]);
-		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+		$startDate = new Carbon($request->startDate);
+		$endDate = new Carbon($request->endDate);
+		$diffInDays = ($endDate->diffInDays($startDate));
+		$excessHours =($endDate->diffInHours($startDate)) % 24;
+		// dd($startDate->toDateTimeString());
+		// dd($diffInDays);
 
-		$response = $client->request("GET", "/cars/".$request->carId, [
-			"headers" => [
-				"Authorization" => Session::get("token")
-			]
-		]);
+		try {
+			// $client = new Client(["base_uri" => "http://localhost:3000"]);
+			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
 
-		$car = json_decode($response->getBody());
+			$response = $client->request("GET", "/cars/".$request->carId, [
+				"headers" => [
+					"Authorization" => Session::get("token")
+				]
+			]);
 
-		$startDate = Carbon::parse($request->startDate);
-		$endDate = Carbon::parse($request->endtDate);
-		$diffInDays = $startDate->diffInDays($endDate);
-		$totalCharge = $car->data->price * $diffInDays;
+			$car = json_decode($response->getBody())->data;
 
-		Session::put('startDate', $request->startDate);
-		Session::put('endDate', $request->endDate);
-		Session::put('carId', $request->carId);
-		Session::put('carName', $car->data->brandMod);
-		Session::put('carImage', $car->data->image);
-		Session::put('bookedDays', $diffInDays);
-		Session::put('totalCharge', $totalCharge);
+			/* counter for excess hours currently 0 */
+			$excessHoursPrice = 0;
 
-		return view('user.bookingForm');
+			if($excessHours >= 12) {
+				$diffInDays += 1;
+			} elseif($excessHours < 12 && $excessHours > 0) {
+				$hourlyRate = ($car->price) / 24;
+				$excessHoursPrice = $excessHours * $hourlyRate;
+			}
+
+			$totalCharge = (($car->price) * $diffInDays) + $excessHoursPrice;
+			// dd($totalCharge);
+			Session::pull('booking');
+
+			Session::put('booking', [
+				'startDate' => $startDate,
+				'endDate' => $endDate,
+				'carId' => $request->carId,
+				'carName' => $car->brandMod,
+				'carImage' => $car->image,
+				'carPrice' => $car->price,
+				'bookedDays' => $endDate->diffInDays($startDate),
+				'excessHours' => $excessHours,
+				'excessHoursPrice' => $excessHoursPrice,
+				'totalCharge'=> $totalCharge
+			]);
+
+			return view('user.bookingForm');
+		} catch(BadResponseException $e) {
+			// dd($e->getRequest());
+		    if ($e->hasResponse()) {
+		    	$e = json_decode($e->getResponse()->getBody()->getContents(), true);
+		    	// dd($e['error']);
+		        Session::flash("error", $e['error']);
+				return redirect('/cars');
+		    }
+		}
 	}
 
 	public function trans_index() {
@@ -83,7 +116,7 @@ class UserController extends Controller
 		]);
 
 		$result = json_decode($response->getBody());
-
+		
 		Session::put("trans", $result);
 
 		return view('user.transactions');	

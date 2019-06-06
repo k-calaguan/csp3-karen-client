@@ -41,4 +41,5 @@ Route::get('/bookings', 'UserController@showBookingForm');
 Route::get('/transactions', 'UserController@trans_index');
 
 /* Stripe */
-Route::post('charge', 'StripeController@charge');
+Route::post('/charge/stripe', 'StripeController@charge');
+Route::post('/transactions/refund/{id}', 'StripeController@refund');
