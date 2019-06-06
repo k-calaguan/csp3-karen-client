@@ -13,6 +13,7 @@ use GuzzleHttp\Exception\BadResponseException;
 class StripeController extends Controller
 {
 	public function charge(Request $request) {
+		$uri = config('constants.baseURI');
 		// dd($request->all());
 		// dd(Session('booking'));
 
@@ -29,8 +30,7 @@ class StripeController extends Controller
 		$totalCharge = Session('booking')['totalCharge'];
 
 		try {
-			// $client = new Client(["base_uri" => "http://localhost:3000"]);
-			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+			$client = new Client(['base_uri' => "$uri"]);
 
 			$response = $client->request('post', '/bookings', [
 				"headers" => [
@@ -67,10 +67,11 @@ class StripeController extends Controller
 	}
 
 	public function refund(Request $request, $id) {
+		$uri = config('constants.baseURI');
 		// dd($id);
 		try {
 			// $client = new Client(["base_uri" => "http://localhost:3000"]);
-			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+			$client = new Client(['base_uri' => "$uri"]);
 
 			$response = $client->request('delete', '/bookings/'.$id, [
 				"headers" => [

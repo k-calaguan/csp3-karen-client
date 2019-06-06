@@ -16,9 +16,10 @@ class UserController extends Controller
 	}
 
 	public function cars() {
-		// $client = new Client(["base_uri" => "http://localhost:3000"]);
-		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+		$uri = config('constants.baseURI');
 
+		$client = new Client(['base_uri' => "$uri"]);
+		
 		$response = $client->request("GET", "/cars", [
 			"headers" => [
 				"Authorization" => Session::get("token")
@@ -34,6 +35,7 @@ class UserController extends Controller
 
 
 	public function showBookingForm(Request $request) {
+		$uri = config('constants.baseURI');
 		// dd($request);
 		$validator = Validator::make($request->all(), [
 			'startDate' => 'required|date',
@@ -55,8 +57,7 @@ class UserController extends Controller
 		// dd($diffInDays);
 
 		try {
-			// $client = new Client(["base_uri" => "http://localhost:3000"]);
-			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+			$client = new Client(['base_uri' => "$uri"]);
 
 			$response = $client->request("GET", "/cars/".$request->carId, [
 				"headers" => [
@@ -106,8 +107,9 @@ class UserController extends Controller
 	}
 
 	public function trans_index() {
-		// $client = new Client(["base_uri" => "http://localhost:3000"]);
-		$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+		$uri = config('constants.baseURI');
+
+		$client = new Client(['base_uri' => "$uri"]);
 
 		$response = $client->request("GET", "/bookings", [
 			"headers" => [

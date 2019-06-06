@@ -16,6 +16,8 @@ class AuthController extends Controller
 	}
 
 	public function regUser(Request $request) {
+		$uri = config('constants.baseURI');
+
 		$validator = Validator::make($request->all(), [
 			'name' => 'required|string|max:255',
 			'email' => 'required|email|max:255',
@@ -35,8 +37,7 @@ class AuthController extends Controller
 		}
 
 		try {
-			// $client = new Client(['base_uri' => "http://localhost:3000"]);
-			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+			$client = new Client(['base_uri' => "$uri"]);
 
 			$response = $client->request('post', '/register', [
 				"json" => [
@@ -70,9 +71,10 @@ class AuthController extends Controller
 	}
 
 	public function loginUser(Request $request) {
+		$uri = config('constants.baseURI');
+
 		try {
-			// $client = new Client(['base_uri' => "http://localhost:3000"]);
-			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
+			$client = new Client(['base_uri' => "$uri"]);
 
 			$response = $client->request('post', '/auth/login', [
 				"json" => [
