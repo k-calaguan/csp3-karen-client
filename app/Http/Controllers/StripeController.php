@@ -61,7 +61,7 @@ class StripeController extends Controller
 				$e = json_decode($e->getResponse()->getBody()->getContents(), true);
 				// dd($e['error']);
 				Session::flash("error", $e['error']);
-				return redirect('/cars');
+				return view('user.transactions');
 			}
 		}
 	}
