@@ -83,7 +83,7 @@ class StripeController extends Controller
 
 			// dd($result);
 			Session::flash("message", "Succesffully refunded " . $id);
-			return redirect('/Transactions');
+			return redirect('/transactions');
 		} catch(BadResponseException $e) {
 			if ($e->hasResponse()) {
 				$e = json_decode($e->getResponse()->getBody()->getContents(), true);
