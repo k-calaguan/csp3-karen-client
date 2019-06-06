@@ -25,8 +25,8 @@
 						<th>Car</th>
 						<th>Scheduled Dates</th>
 						<th>Total Charge</th>
-						<th colspan="2">Reference Id</th>
-						<th></th>
+						<th>Reference Id</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,19 +34,28 @@
 					<tr>
 						<td>{{ \Carbon\Carbon::parse($tran->created_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
 						<td>{{ $tran->carId }} </td>
-						<td>
-							Start: {{ \Carbon\Carbon::parse($tran->schedDate->startDate)->format('d-m-Y g:i:s A') }}<br>
-							End: {{ \Carbon\Carbon::parse($tran->schedDate->endDate)->format('d-m-Y g:i:s A') }}
-						</td>
+						@if(isset($tran->schedDate))
+							<td>
+								Start: {{ \Carbon\Carbon::parse($tran->schedDate->startDate)->format('d-m-Y g:i:s A') }}<br>
+								End: {{ \Carbon\Carbon::parse($tran->schedDate->endDate)->format('d-m-Y g:i:s A') }}
+							</td>
+						@else
+							<td> --- </td>
+						@endif
 						<td>Php {{number_format($tran->totalCharge)}}</td>
 						<td>{{ $tran->_id }}</td>
 						<td>
 							@if($tran->transactionType == "booking")
-								<form method="POST" action="/transactions/refund/{{$tran->_id}}">
-									@csrf
-									@method("DELETE")
-									<button type="submit" class="btn btn-secondary btn-sm">Cancel booking</button>
-								</form>
+								@if(\Carbon\Carbon::now()->format('d-m-Y g:i:s A') == (\Carbon\Carbon::parse($tran->schedDate->endDate)->format('d-m-Y g:i:s A')))
+									Completed
+								@else
+									<form method="POST" action="/transactions/refund/{{$tran->_id}}">
+										@csrf
+										<button type="submit" class="btn btn-secondary btn-sm">Cancel booking</button>
+									</form>
+								@endif
+							@elseif($tran->transactionType == "Cancellation" || $tran->transactionType == "cancellation")
+								Refunded
 							@endif
 						</td>
 					</tr>

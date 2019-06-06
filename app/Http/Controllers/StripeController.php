@@ -68,7 +68,6 @@ class StripeController extends Controller
 
 	public function refund(Request $request, $id) {
 		// dd($id);
-
 		try {
 			// $client = new Client(["base_uri" => "http://localhost:3000"]);
 			$client = new Client(['base_uri' => "https://csp3-karen-api.herokuapp.com/"]);
