@@ -42,7 +42,7 @@
 						@else
 							<td> --- </td>
 						@endif
-						<td>Php {{number_format(($tran->totalCharge)/100)}}</td>
+						<td>Php {{number_format(($tran->totalCharge)/100)}}.00</td>
 						<td>{{ $tran->_id }}</td>
 						<td>
 							@if($tran->transactionType == "booking")
