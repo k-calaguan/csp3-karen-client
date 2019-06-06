@@ -89,8 +89,9 @@ class AuthController extends Controller
 
 			if($result->data->user->isAdmin == true) {
 				Session::flash("message", "Welcome back ".$result->data->user->name);
-				return redirect('/admin/dashboard');
+				return redirect('/admin/cars');
 			} else {
+				Session::flash("message", "Welcome back ".$result->data->user->name);
 				return redirect('/cars');
 			}
 		} catch(BadResponseException $e) {

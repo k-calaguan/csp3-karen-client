@@ -4,9 +4,15 @@
 
 <div class="container">
 	@if(Session::has("message"))
-		<div class="alert alert-{{Session('type')}} col-sm-12 col-lg-6">
-			<span class="text-{{Session('type')}}">{{Session('message')}}</span>
+		<div class="alert alert-light alert-trans col-sm-12 col-lg-5">
+			<span class="text-success">{{Session('message')}}</span>
 		</div>
+	@endif
+
+	@if(Session::has("error"))
+	<div class="alert alert-light alert-trans col-sm-12 col-lg-5">
+		<span class="text-danger mb-1">{{ Session("error") }}</span><br>
+	</div>
 	@endif
 
 	<a class="btn btn-secondary mb-1" href=".collapseDetails" data-toggle="collapse">
@@ -40,7 +46,7 @@
 						<td>
 							<img src="{{ $car->image }}" class="img-thumbnail" style="height: 50px">
 						</td>
-						<td class="collapse collapseDetails">Php{{ $car->price }}</td>
+						<td class="collapse collapseDetails">Php {{ number_format($car->price) }}.00</td>
 						<td class="collapse collapseDetails">{{ $car->modYear }}</td>
 						<td class="collapse collapseDetails">{{ $car->bodyType }}</td>
 						<td class="collapse collapseDetails">{{ $car->transmission }}</td>
@@ -182,7 +188,7 @@
 							@endif
 						</td>
 						<td>{{ count($car->bookings) }}</td>
-						<td>{{ Carbon\Carbon::parse($car->updated_at)->format('m-d-y H:m:s') }}</td>
+						<td>{{ Carbon\Carbon::parse($car->updated_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
 					</tr>
 					@endforeach
 				</tbody>

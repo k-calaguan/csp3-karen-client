@@ -18,12 +18,12 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->created_at)->format('m-d-Y H:m:s') }}</td>
+						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->created_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
 						<td>{{ Session('results')->customer->name }}</td>
 						<td>{{ Session('results')->car->brandMod }}</td>
 						<td>{{ Session('results')->booking->transactionType }}</td>
 						<td>{{ Session('results')->booking->totalCharge }}</td>
-						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->updated_at)->format('m-d-Y H:m:s') }}</td>
+						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->updated_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
 					</tr>
 				</tbody>
 			</table>

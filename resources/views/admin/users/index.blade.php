@@ -23,7 +23,7 @@
 					<tr>
 						<td>{{ $user->name }}</td>
 						<td>{{ $user->email }}</td>
-						<td>{{ Carbon\Carbon::parse($user->dob)->format('m/d/Y') }}</td>
+						<td>{{ Carbon\Carbon::parse($user->dob)->format('d-m-Y') }}</td>
 						@if($user->gender == 'male')
 							<td>M</td>
 						@elseif($user->gender == 'female')
@@ -38,7 +38,7 @@
 						@else
 							<td>User</td>
 						@endif
-						<td>{{ Carbon\Carbon::parse($user->created_at)->format('m/d/Y h:m:s') }}</td>
+						<td>{{ Carbon\Carbon::parse($user->created_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
 					</tr>
 					@endforeach
 				</tbody>

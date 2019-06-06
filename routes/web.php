@@ -26,7 +26,6 @@ Route::post('/login', 'AuthController@loginUser');
 Route::get('/logout', 'AuthController@logout');
 
 /* Admin */
-Route::get('/admin/dashboard', 'AdminController@dashboard');
 Route::get('/admin/cars', 'AdminController@car_index');
 Route::get('/admin/cars/create', 'AdminController@car_showForm');
 Route::post('/admin/cars/', 'AdminController@car_store');
