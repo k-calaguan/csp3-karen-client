@@ -46,7 +46,7 @@
 					@csrf
 					<script
 						src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-						data-key="{{config('constants.baseURI')}}"
+						data-key="{{config('constants.stripePubKey')}}"
 						data-amount="{{(Session::get('booking')['totalCharge'])*100}}"
 						data-name="KAREN"
 						data-description="{{(Session::get('booking')['carName'])}} - {{Session::get('booking')['bookedDays']}} day(s)"
