@@ -2,7 +2,9 @@
 
 @section('content')
 
-<div class="container">
+<div class="container mb-3">
+	{{-- @dd(Session()) --}}
+	{{-- @dd(count(Session('results'))) --}}
 	<div class="card" style="border: none">
 		<div class="card-body table-responsive">
 			<table class="table">
@@ -17,14 +19,16 @@
 					</tr>
 				</thead>
 				<tbody>
+					@foreach(Session('results') as $result => $data)
 					<tr>
-						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->created_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
-						<td>{{ Session('results')->customer->name }}</td>
-						<td>{{ Session('results')->car->brandMod }}</td>
-						<td>{{ Session('results')->booking->transactionType }}</td>
-						<td>{{ Session('results')->booking->totalCharge }}</td>
-						<td>{{ \Carbon\Carbon::parse(Session('results')->booking->updated_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
+						<td>{{ \Carbon\Carbon::parse($data->created_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
+						<td>{{ ucwords($data->customerId->name) }}</td>
+						<td>{{ ucwords($data->carId->brandMod) }}</td>
+						<td>{{ ucwords($data->transactionType) }}</td>
+						<td>Php {{ number_format(($data->totalCharge)/100) }}.00</td>
+						<td>{{ \Carbon\Carbon::parse($data->updated_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
 					</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>

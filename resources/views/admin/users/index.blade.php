@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container mb-3">
 	<div class="card" style="border: none">
 		<div class="card-body table-responsive">
 			<table class="table">
@@ -21,7 +21,7 @@
 				<tbody>
 					@foreach(Session::get('users') as $user)
 					<tr>
-						<td>{{ $user->name }}</td>
+						<td>{{ ucwords($user->name) }}</td>
 						<td>{{ $user->email }}</td>
 						<td>{{ Carbon\Carbon::parse($user->dob)->format('d-m-Y') }}</td>
 						@if($user->gender == 'male')

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container mb-3">
 	@if(Session::has("message"))
 		<div class="alert alert-light alert-trans col-sm-12 col-lg-5">
 			<span class="text-success">{{Session('message')}}</span>
@@ -48,10 +48,10 @@
 						</td>
 						<td class="collapse collapseDetails">Php {{ number_format($car->price) }}.00</td>
 						<td class="collapse collapseDetails">{{ $car->modYear }}</td>
-						<td class="collapse collapseDetails">{{ $car->bodyType }}</td>
-						<td class="collapse collapseDetails">{{ $car->transmission }}</td>
+						<td class="collapse collapseDetails">{{ ucwords($car->bodyType) }}</td>
+						<td class="collapse collapseDetails">{{ ucwords($car->transmission) }}</td>
 						<td class="collapse collapseDetails">{{ $car->engine }} L</td>
-						<td class="collapse collapseDetails">{{ $car->fuelType }}</td>
+						<td class="collapse collapseDetails">{{ ucwords($car->fuelType) }}</td>
 						<td class="collapse collapseDetails">{{ $car->seats }}</td>
 						<td>
 							{{ $car->plateNum }}
@@ -61,7 +61,7 @@
 								<div class="modal-dialog modal-lg" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title">{{ $car->brandMod }} - {{ $car->plateNum }}</h4 class="modal-title">
+											<h4 class="modal-title">{{ ucwords($car->brandMod) }} - {{ $car->plateNum }}</h4 class="modal-title">
 										</div>
 										<div class="modal-body">
 											<div class="container-fluid">
@@ -72,7 +72,7 @@
 													<div class="row">
 														<div class="form-group col-sm-12 col-lg-8">
 															<label for="brandMod">Brand and Model</label>
-															<input id="brandMod" type="text" class="form-control" name="brandMod" value="{{ $car->brandMod }}" required placeholder="Ex. Toyota Altis">
+															<input id="brandMod" type="text" class="form-control" name="brandMod" value="{{ ($car->brandMod) }}" required placeholder="Ex. Toyota Altis">
 														</div>
 														<div class="form-group col-sm-12 col-lg-4">
 															<label for="plateNum">Plate No.</label>
@@ -96,7 +96,7 @@
 														<div class="col-sm-12 col-lg-4 form-group">
 															<label for="bodyType">Body Type</label>
 															<select id="bodyType" class="form-control" name="bodyType" required>
-																<option value="{{ $car->bodyType }}">{{ $car->bodyType }}</option>
+																<option value="{{ $car->bodyType }}">{{ ucwords($car->bodyType) }}</option>
 																<option value="Crossover">Crossover</option>
 																<option value="Hatchback">Hatchback</option>
 																<option value="MPV">MPV</option>
@@ -120,7 +120,7 @@
 														<div class="col-sm-12 col-lg-4 form-group">
 															<label for="fuelType">Fuel type</label>
 															<select id="fuelType" class="form-control" name="fuelType" required>
-																@if($car->fuelType == "diesel")
+																@if($car->fuelType == "diesel" || $car->fuelType == "Diesel")
 																	<option value="Diesel" selected>Diesel</option>
 																	<option value="Gasoline">Gasoline</option>
 																@else

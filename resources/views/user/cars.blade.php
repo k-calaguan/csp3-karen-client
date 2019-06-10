@@ -24,9 +24,8 @@
 			</div>
 
 			<div class="card-body" style="line-height: .5;">
-				<p>Name: {{ $car->brandMod }}</p>
-				<p>Price: {{ 'Php ' . number_format($car->price, 2) }} /day</p>
-				
+				<p>Name: {{ ucwords($car->brandMod) }}</p>
+				<p>Price: Php {{ number_format($car->price, 2) }} /day</p>
 				
 				<div class="collapse" id="moreDetails">
 					<p>Model Year: {{ $car->modYear }}</p>

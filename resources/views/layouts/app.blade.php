@@ -107,5 +107,15 @@
 	<main class="mt-2">
 		@yield('content')
 	</main>
+
+	<footer>
+		<div class="content text-center pt-2 px-4">
+			<small class="float-left">@ 2019 KAREN</small>
+			<small class="float-right">Designed & developed by Kristanelle Calaguan with
+				<i class="fas fa-heart"></i> &
+				<i class="fas fa-mug-hot"></i>
+			</small>
+		</div>
+	</footer>
 </body>
 </html>

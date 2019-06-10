@@ -15,7 +15,7 @@
 	</div>
 	@endif
 
-	{{-- @dd(Session()) --}}
+	{{-- @dd(Session('trans')) --}}
 	<div class="card" style="border: none">
 		<div class="card-body table-responsive">
 			<table class="table">
@@ -30,31 +30,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach(Session('trans') as $tran)
+					@foreach(Session('trans') as $result => $data)
 					<tr>
-						<td>{{ \Carbon\Carbon::parse($tran->created_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
-						<td>{{ $tran->carId }} </td>
-						@if(isset($tran->schedDate))
+						<td>{{ \Carbon\Carbon::parse($data->created_at)->setTimeZone('Asia/Shanghai')->format('d-m-Y g:i:s A') }}</td>
+						<td>{{ ucwords($data->carId->brandMod) }} </td>
+						@if(isset($data->schedDate))
 							<td>
-								Start: {{ \Carbon\Carbon::parse($tran->schedDate->startDate)->format('d-m-Y g:i:s A') }}<br>
-								End: {{ \Carbon\Carbon::parse($tran->schedDate->endDate)->format('d-m-Y g:i:s A') }}
+								Start: {{ \Carbon\Carbon::parse($data->schedDate->startDate)->format('d-m-Y g:i:s A') }}<br>
+								End: {{ \Carbon\Carbon::parse($data->schedDate->endDate)->format('d-m-Y g:i:s A') }}
 							</td>
 						@else
 							<td> --- </td>
 						@endif
-						<td>Php {{number_format(($tran->totalCharge)/100)}}.00</td>
-						<td>{{ $tran->_id }}</td>
+						<td>Php {{number_format(($data->totalCharge)/100)}}.00</td>
+						<td>{{ $data->_id }}</td>
 						<td>
-							@if($tran->transactionType == "booking")
-								@if(\Carbon\Carbon::now()->format('d-m-Y g:i:s A') == (\Carbon\Carbon::parse($tran->schedDate->endDate)->format('d-m-Y g:i:s A')))
+							@if($data->transactionType == "Booking" || $data->transactionType == "booking")
+								@if(\Carbon\Carbon::now()->format('d-m-Y g:i:s A') >= (\Carbon\Carbon::parse($data->schedDate->endDate)->format('d-m-Y g:i:s A')))
 									Completed
 								@else
-									<form method="POST" action="/transactions/refund/{{$tran->_id}}">
+									<form method="POST" action="/transactions/refund/{{$data->_id}}">
 										@csrf
 										<button type="submit" class="btn btn-secondary btn-sm">Cancel booking</button>
 									</form>
 								@endif
-							@elseif($tran->transactionType == "Cancellation" || $tran->transactionType == "cancellation")
+							@elseif($data->transactionType == "Cancellation" || $data->transactionType == "cancellation")
 								Refunded
 							@endif
 						</td>

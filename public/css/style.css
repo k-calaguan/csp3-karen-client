@@ -2,10 +2,15 @@
 @import url("https://fonts.googleapis.com/css?family=Aclonica");
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:500");
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,700");
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+
+* {
+	padding: 0;
+	margin: 0;
+}
 
 html, body {
-	height: 100vh;
-	margin: 0;
+	height: 100%;
 	scroll-behavior: smooth;
 }
 
@@ -23,6 +28,18 @@ html, body {
 .reg-card {
 	background-color: rgba(252, 252, 252, 0.7); 
 	border: none;
+}
+
+footer {
+	background-color: #E4E4E4;
+	height: 5%;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	margin-top: 25px;
+	color: #636363;
+	font-family: 'Arvo', serif;
 }
 
 .text-brand {

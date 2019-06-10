@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container mb-4">
 	@if(Session::has("message"))
 		<div class="alert alert-{{Session('type')}} col-sm-12 col-lg-4">
 			<span class="text-{{Session('type')}}">{{Session('message')}}</span>
@@ -15,7 +15,7 @@
 		</div>
 	@endif
 
-	<div class="card col-sm-12 col-lg-6">
+	<div class="card col-sm-12 col-lg-6 mt-3">
 		<div class="card-body">
 			<form method="POST" action="/admin/cars" enctype="multipart/form-data">
 				@csrf

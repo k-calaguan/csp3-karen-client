@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container pt-4">
 	@if(Session::has("message"))
 		<div class="alert alert-light alert-trans col-sm-12 col-lg-5">
 			<span class="text-success">{{Session('message')}}</span>
@@ -31,10 +31,10 @@
 					<li>Rented day(s): {{Session::get('booking')['bookedDays']}}</li>
 					@if(Session::get('booking')['excessHours'] > 12)
 						<li>Extra hours: {{Session::get('booking')['excessHours']}}</li>
-						<li>+More 12 hour-charge fee: Php {{number_format(Session::get('booking')['carPrice'], 2)}}</li>
+						<li>+More than 12-hour fee: Php {{number_format(Session::get('booking')['carPrice']) }}.00</li>
 					@elseif(Session::get('booking')['excessHours'] < 12 && Session::get('booking')['excessHours'] > 0)
 						<li>Extra hours: {{Session::get('booking')['excessHours']}}</li>
-						<li>+Prorated charge: Php {{number_format(Session::get('booking')['excessHoursPrice'], 2)}}</li>
+						<li>+Prorated charge: Php {{number_format(Session::get('booking')['excessHoursPrice'])}}.00</li>
 					@endif
 					<li class="pt-3">Total Amount: <strong>Php {{number_format(Session::get('booking')['totalCharge'], 2)}}</strong></li>
 				</ul>
